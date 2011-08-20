@@ -1,0 +1,15 @@
+{
+    "name": "豆瓣音乐下载播放",
+    "version": "0.1.0",
+    "description": "在豆瓣音乐唱片页添加下载链接和豆瓣电台播放链接",
+    "permissions": [
+        "tabs",
+        "http://music.douban.com/subject/*",
+        "http://douban.fm/*"
+    ],
+    "background_page" : "background.html",
+    "page_action": {
+        "default_icon": "douban.ico",
+        "default_title": "豆瓣音乐下载播放"
+    }
+}

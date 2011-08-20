@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<script>
+chrome.extension.onRequest.addListener(function(request, sender, callback) {
+    if (request.action != 'getDoubanFmInfoByAid') {
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(data) {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var data = JSON.parse(xhr.responseText);
+                callback(data);
+            } else {
+                callback(null);
+            }
+        }
+    }
+    xhr.open('GET', 'http://douban.fm/j/mine/playlist?type=n&channel=0&context=subject_id:' + parseInt(request.aid), true);
+    xhr.send();
+});
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    if (tab.url.match(/^http:\/\/music.douban.com\/subject\/\d+\//)) {
+        chrome.pageAction.show(tabId);
+    }
+});
+
+chrome.pageAction.onClicked.addListener(function(tab) {
+    chrome.tabs.executeScript(null, {file: "content_script.js"});
+});
+</script>
+</body>
+</html>
