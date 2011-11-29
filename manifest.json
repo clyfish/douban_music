@@ -1,6 +1,6 @@
 {
     "name": "豆瓣音乐下载播放",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "在豆瓣音乐唱片页添加下载链接和豆瓣电台播放链接",
     "permissions": [
         "tabs",

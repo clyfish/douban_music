@@ -14,9 +14,9 @@
     for (var i = 0; i < document.links.length; i++) {
         var link = document.links[i];
         if (link.id && link.id.match(/^song-\d+$/)) {
-            var sid = link.id.split('-')[1], nextTd = link.parentNode.nextSibling;
+            var sid = link.id.split('-')[1], nextTd = link.parentNode.previousSibling;
             while (!nextTd.tagName || nextTd.tagName.toUpperCase() != 'TD') {
-                nextTd = nextTd.nextSibling;
+                nextTd = nextTd.previousSibling;
             }
             sidSet[sid] = nextTd;
             remain++;
@@ -36,7 +36,7 @@
                 if (song.sid in sidSet) {
                     download = '<a href="' + song.url + '" target="_blank">下载</a>';
                     listen = '<a href="http://douban.fm/?start=' + song.sid + 'g' + song.ssid + 'g0&cid=0" target="_blank">播放</a>';
-                    sidSet[song.sid].innerHTML = download + ' ' + listen;
+                    sidSet[song.sid].innerHTML += '&emsp;' + download + ' ' + listen;
                     delete sidSet[song.sid];
                     remain--;
                 }
